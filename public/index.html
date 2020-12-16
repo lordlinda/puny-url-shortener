@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma-rtl.min.css" integrity="sha512-Qg7DT+PJFcLzb4GyNnpT62wKHBzojUVDQf/OvytqnrGDr931W2lfvAiYGz5UnX8dAiVPHFLkySoHXRL/rOeXKA==" crossorigin="anonymous" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short url shortener</title>
+</head>
+<body>
+    <section class="hero is-medium is-primary is-bold">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+               puny.li
+            </h1>
+            <h2 class="subtitle">
+               Shortening URLs since 2018
+            </h2>
+          </div>
+        </div>
+      </section>
+      <main id="app">
+        <form v-if="!success" @submit.prevent="createPuny()">
+          <div v-if="error" class="notification is-danger">
+            {{error}}
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">URL</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <p class="control">
+                  <input v-model="url" class="input is-large" type="text" placeholder="http://example.com" required>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Name</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <p class="control">
+                  <input v-model="name" class="input is-large" type="text" placeholder="super-catchy" required>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="puny-button">
+            <button type="submit" class="button is-large is-success">Punify</button>
+          </div>
+        </form>
+        <h1 v-if="success" class="title is-1" style="text-align: center"><a :href="'/api/urls/' + name" target="_blank">https://puny.li/{{name}}</a></h1>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+      <script src="main.js"></script>
+
+</body>
+</html>
